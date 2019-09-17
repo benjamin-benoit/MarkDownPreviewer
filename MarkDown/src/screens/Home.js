@@ -4,7 +4,7 @@ import { Textarea, Button } from "native-base";
 import styled from 'styled-components';
 import marked from 'marked';
 import HTML from 'react-native-render-html';
-import { Clipboard, ScrollView } from 'react-native'
+import { Clipboard, AsyncStorage } from 'react-native'
 import insane from 'insane';
 
 const Screen = ({ navigation }) => {
@@ -14,7 +14,28 @@ const Screen = ({ navigation }) => {
     copyToClipboard = async () => {
         await Clipboard.setString(markDown);
         alert('Copied to Clipboard!');
-      };
+    };
+
+    _storeData = async () => {
+        try {
+          await AsyncStorage.setItem('myMarkDown', markDown);
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+    // _retrieveData = async () => {
+    // try {
+    //     const value = await AsyncStorage.getItem('TASKS');
+    //     if (value !== null) {
+    //         markDown = value
+    //     } else {
+    //         markDown = "# default text"
+    //     }
+    // } catch (error) {
+    //     alert(error);
+    // }
+    // };
 
     return (
     <>
@@ -22,7 +43,8 @@ const Screen = ({ navigation }) => {
             <TextContainer>
                 <Textarea
                 style={{ height: '100%', backgroundColor: '#ebebeb' }}
-                placeholder="Type here to get your markdown!"
+                placeholder="Tape your text"
+                value={markDown}
                 onChangeText={setMarkDown}
                 />
             </TextContainer>
