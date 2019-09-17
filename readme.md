@@ -4,6 +4,10 @@ Convert Github flavored markdown into HTML code.
 
 Benjamin
 
+## Launch
+
+Tape 'yarn build' to launch the app
+
 ## Features
 
 - User can enter Github flavored markdown into a textarea
